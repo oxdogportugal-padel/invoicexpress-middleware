@@ -33,8 +33,15 @@
 </head>
 <body>
   <h1>Gauntlet workbench</h1>
-  <div class="subtitle">Zoho Inventory → InvoiceXpress draft-invoice middleware. Judged against SPEC.md. Last updated: round 1 (fixture corpus landed).</div>
-  <div class="round-badge">ROUND 1 — fixture corpus complete, mapping/resolution pieces not yet built</div>
+  <div class="subtitle">Zoho Inventory → InvoiceXpress draft-invoice middleware. Judged against SPEC.md. Last updated: round 2 (wave 1 in flight).</div>
+  <div class="round-badge">ROUND 2 — wave 1: discount/tax mapping, IX data snapshots, Bar D suite (all in progress)</div>
+
+  <section>
+    <h2>Critical finding: the direct_sales discount is not derivable from Zoho</h2>
+    <p style="font-size: 13px;">22 of 42 fixtures (<code>sales_channel: "direct_sales"</code>) apply a flat 10% discount on the hand-made invoice with <strong>zero trace of it anywhere in the corresponding Zoho sales order</strong> — no discount field, no custom field, no note. The other 20 (<code>sales_channel: "shopify"</code>) do carry it in Zoho's own data, reliably.</p>
+    <p style="font-size: 13px;"><strong>User decision (2026-08-20):</strong> park every non-Shopify-channel order for human review rather than hardcode an inferred 10% rule — matches SPEC.md §2's "no silent partial success" gate literally. Consequence: roughly half the golden corpus cannot produce a generated invoice at all; for those fixtures Bar A is graded as "did it correctly refuse and park," not "did it win the blind A/B." Full writeup: <code>fixtures/golden/COVERAGE_NOTES.md</code> and <code>CONTRACT.md</code>.</p>
+    <p style="font-size: 13px;">Also found: fixture <code>016-leticia-azevedo</code> is a genuine human double-discount error (its invoice total doesn't reconcile to its own sales order). The mapping code is being built to produce the mathematically correct total, not to replicate that bug.</p>
+  </section>
 
   <section>
     <h2>Definition of done (SPEC.md §7)</h2>
