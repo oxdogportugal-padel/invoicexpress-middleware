@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Gauntlet workbench — Zoho → InvoiceXpress middleware</title>
+<style>
+  :root {
+    --bg: #0b0d10; --panel: #14171b; --border: #23262b; --text: #e6e8eb; --muted: #9aa4af;
+    --green: #4ade80; --red: #f87171; --amber: #fbbf24; --blue: #7fb3ff;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 32px; background: var(--bg); color: var(--text); line-height: 1.5; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+  h2 { font-size: 16px; margin: 0 0 12px; }
+  section { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+  .round-badge { display: inline-block; background: #1a2f3a; color: var(--blue); border-radius: 6px; padding: 2px 10px; font-size: 12px; font-weight: 600; margin-bottom: 16px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  th { color: var(--muted); text-transform: uppercase; font-size: 11px; }
+  .status-pending { color: var(--muted); }
+  .status-pass { color: var(--green); }
+  .status-fail { color: var(--red); }
+  .status-progress { color: var(--amber); }
+  ul { margin: 6px 0; padding-left: 20px; font-size: 13px; }
+  li { margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .tile { background: #0f1114; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+  .tile .n { font-size: 22px; font-weight: 700; }
+  .tile .label { font-size: 12px; color: var(--muted); }
+  code { background: #0f1114; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>Gauntlet workbench</h1>
+  <div class="subtitle">Zoho Inventory → InvoiceXpress draft-invoice middleware. Judged against SPEC.md. Last updated: round 0.</div>
+  <div class="round-badge">ROUND 0 — scaffolding + fixture acquisition</div>
+
+  <section>
+    <h2>Definition of done (SPEC.md §7)</h2>
+    <table>
+      <thead><tr><th>Gate</th><th>Status</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Every golden fixture wins/ties its blind A/B</td><td class="status-pending">not started</td><td>fixtures/golden/ corpus being built from live Zoho + InvoiceXpress data</td></tr>
+        <tr><td>Bar B reconciliation exact across corpus</td><td class="status-pending">not started</td><td>waiting on fixtures + mapping code</td></tr>
+        <tr><td>Customer resolution ordering: zero false-positive rate</td><td class="status-pending">not started</td><td>waiting on fixtures</td></tr>
+        <tr><td>Adversarial suite green</td><td class="status-pending">not started</td><td>critic-authored suite not yet written</td></tr>
+        <tr><td>Fresh critic passes Bar E test</td><td class="status-progress">scaffold exists</td><td>dashboard built (order list, per-order detail, request/response log, replay stub); not yet critic-tested end to end</td></tr>
+        <tr><td>Every hard gate (§2) has a red-when-removed test</td><td class="status-pending">not started</td><td>no mapping/invoice-creation code exists yet to gate</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Round 0 decisions</h2>
+    <ul>
+      <li>Runtime: Node.js + TypeScript + Express + better-sqlite3, single self-contained process. User-approved.</li>
+      <li>Bar E interface: server-rendered dashboard at <code>/</code> (status counts + order table) and <code>/orders/:id</code> (full request/response log, correlation ID, replay button), plus a JSON mirror at <code>/api/orders</code>.</li>
+      <li>Idempotency enforced at the storage layer: <code>orders.zoho_salesorder_id</code> is UNIQUE; concurrent duplicate webhook deliveries race safely to a single row.</li>
+      <li>Secrets never reach storage: <code>redact.ts</code> strips known secret env values from every logged URL/header/body before it's written; unit-tested.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Fixture corpus (fixtures/golden/)</h2>
+    <div class="grid">
+      <div class="tile"><div class="n">—</div><div class="label">Pairs built</div></div>
+      <div class="tile"><div class="n">—</div><div class="label">Required categories covered</div></div>
+    </div>
+    <p style="color: var(--muted); font-size: 13px; margin-top: 12px;">Building now: pulling real historical Zoho sales orders and their hand-made InvoiceXpress invoices, correlating by reference number, tagging each fixture against SPEC.md §3's 11 required categories. Updates when the fetch completes.</p>
+  </section>
+
+  <section>
+    <h2>Bar A — blind A/B results</h2>
+    <p style="color: var(--muted); font-size: 13px;">No fixtures yet — nothing to run the blind A/B against.</p>
+  </section>
+
+  <section>
+    <h2>Bar B — reconciliation (cent-level diffs)</h2>
+    <p style="color: var(--muted); font-size: 13px;">No mapping code yet.</p>
+  </section>
+
+  <section>
+    <h2>Bar C — customer resolution: candidate orderings</h2>
+    <table>
+      <thead><tr><th>Ordering</th><th>False positive rate</th><th>False negative rate</th><th>Ambiguous rate</th></tr></thead>
+      <tbody>
+        <tr><td>1. display name (phone) → VAT → mobile</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>2. VAT number → display name → mobile</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>3. (agent-proposed alternative)</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p style="color: var(--muted); font-size: 13px; margin-top: 8px;">Not yet measured — needs the fixture corpus.</p>
+  </section>
+
+  <section>
+    <h2>Bar D — adversarial suite</h2>
+    <p style="color: var(--muted); font-size: 13px;">Not yet written. Will be authored by a critic from SPEC.md alone, without reading the implementation.</p>
+  </section>
+
+  <section>
+    <h2>Currently open gaps</h2>
+    <ul>
+      <li>fixtures/golden/ corpus does not exist yet — blocking Bar A, Bar B, Bar C measurement.</li>
+      <li>No customer resolution, item resolution, discount/tax mapping, or invoice-assembly code written yet.</li>
+      <li>No webhook ingestion endpoint yet (idempotent order store exists, nothing calls it yet).</li>
+      <li>No InvoiceXpress or Zoho API client wrappers yet (needed to exercise the known landmines in SPEC.md §4).</li>
+      <li>Adversarial suite and Bar E blind test not yet run.</li>
+    </ul>
+  </section>
+</body>
+</html>
