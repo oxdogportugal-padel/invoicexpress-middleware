@@ -1,0 +1,58 @@
+{
+  "invoice": {
+    "id": 249421121,
+    "status": "settled",
+    "archived": false,
+    "type": "Invoice",
+    "sequence_number": "7/OXD2026",
+    "inverted_sequence_number": "OXD2026/7",
+    "sequence_id": 5998917,
+    "atcud": "J62NTBW9-7",
+    "saft_hash": "kmlp",
+    "date": "2026-01-12",
+    "due_date": "2026-01-12",
+    "reference": "OXD377-26",
+    "observations": "",
+    "token": "249421121617194a436a9441a630f6aa925cd85864d95a6e2",
+    "permalink": "https://web.invoicexpress.com/documents/249421121617194a436a9441a630f6aa925cd85864d95a6e2?language=pt",
+    "retention": 0.0,
+    "global_discount": null,
+    "account": {
+      "organization_name": "YLY - UNIPESSOAL, LDA",
+      "address": {"detail": "Apartado 000032\r\nEC Valadares", "postal_code": "4405-589", "city": "Vila Nova de Gaia", "country": "Portugal"},
+      "email": "info@youlovepadel.pt",
+      "phone": "968063931",
+      "website": "http://www.oxdogpadel.pt",
+      "fiscal_id": "513171630",
+      "bank_data": [{"name": "NIB", "value": "0033 0000 4545 3036 8740 5"}, {"name": "IBAN", "value": "PT50 0033 0000 4545 3036 87405"}, {"name": "Swift/BIC", "value": "BCOMPTPL"}]
+    },
+    "client": {
+      "id": 192343849,
+      "name": "Variantexclusiva Lda",
+      "email": "blspmachado@gmail.com",
+      "fiscal_id": "514212179",
+      "country": "Portugal",
+      "address": {"detail": "Rua Damião de Góis 475", "postal_code": "4050-228", "city": "Porto", "address_country": "PT"}
+    },
+    "items": [
+      {"id": 459655350, "name": "OXD-ULTIMATE-TOUR-X-26", "description": "Ultimate Tour X", "unit_price": 210.5691, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 10.0, "subtotal": 189.5122, "tax_amount": 43.5878, "discount_amount": 21.0569, "total": 233.1, "retention": 0.0}
+    ],
+    "summary": {
+      "sum": 210.57,
+      "discount": 21.06,
+      "before_taxes": 189.51,
+      "taxes": 43.59,
+      "total": 233.1,
+      "currency": {"name": "Euro", "code": "EUR", "symbol": "€"},
+      "retention": 0.0,
+      "pay_progress": "100.0",
+      "to_pay": 0.0,
+      "total_paid": 233.1,
+      "taxes_breakdown": [{"category": "IVA23", "items_value": 189.51, "tax_value": 43.59}],
+      "total_currency_rate": 0.0,
+      "rate": 1.0
+    },
+    "owner_invoice_id": null,
+    "currency": {"name": "Euro", "code": "EUR", "symbol": "€"}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "fetched_at": "2026-08-20",
+  "taxes": [
+    { "id": 86129, "name": "IVA23", "region": null, "code": null, "value": 23.0, "default_tax": 1 },
+    { "id": 86130, "name": "IVA13", "region": null, "code": null, "value": 13.0, "default_tax": 0 },
+    { "id": 86131, "name": "IVA6", "region": null, "code": null, "value": 6.0, "default_tax": 0 },
+    { "id": 86132, "name": "Isento", "region": null, "code": null, "value": 0.0, "default_tax": 0 }
+  ]
+}

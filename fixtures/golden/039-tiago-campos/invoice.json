@@ -1,0 +1,115 @@
+{
+  "invoice": {
+    "id": 262087901,
+    "status": "settled",
+    "archived": false,
+    "type": "Invoice",
+    "sequence_number": "98/OXD2026",
+    "inverted_sequence_number": "OXD2026/98",
+    "sequence_id": 5998917,
+    "atcud": "J62NTBW9-98",
+    "saft_hash": "dETn",
+    "date": "2026-06-28",
+    "due_date": "2026-06-28",
+    "reference": "OXD438-26",
+    "observations": "",
+    "token": "262087901d3777e0b2bec5bb30e8d8845251f7032bdc4222c",
+    "permalink": "https://web.invoicexpress.com/documents/262087901d3777e0b2bec5bb30e8d8845251f7032bdc4222c?language=pt",
+    "retention": 0.0,
+    "global_discount": null,
+    "account": {
+      "organization_name": "YLY - UNIPESSOAL, LDA",
+      "address": {
+        "detail": "Apartado 000032\r\nEC Valadares",
+        "postal_code": "4405-589",
+        "city": "Vila Nova de Gaia",
+        "country": "Portugal"
+      },
+      "email": "info@youlovepadel.pt",
+      "phone": "968063931",
+      "website": "http://www.oxdogpadel.pt",
+      "fiscal_id": "513171630",
+      "logo": "",
+      "bank_data": [
+        {
+          "name": "NIB",
+          "value": "0033 0000 4545 3036 8740 5"
+        },
+        {
+          "name": "IBAN",
+          "value": "PT50 0033 0000 4545 3036 87405"
+        },
+        {
+          "name": "Swift/BIC",
+          "value": "BCOMPTPL"
+        }
+      ]
+    },
+    "client": {
+      "id": 195970869,
+      "name": "Tiago Campos",
+      "email": "tgomescampos@outlook.pt",
+      "fiscal_id": "PT248659820",
+      "country": "Portugal",
+      "address": {
+        "detail": "Rua Fieis De Deus 71",
+        "postal_code": "4495-050",
+        "city": "Póvoa De Varzim",
+        "address_country": "PT"
+      }
+    },
+    "items": [
+      {
+        "id": 480132989,
+        "name": "OXD-PURE-PRO-PLUS-26",
+        "description": "Pure Pro+",
+        "unit_price": 243.0894,
+        "unit": "unit",
+        "quantity": 1.0,
+        "tax": {
+          "id": 86129,
+          "name": "IVA23",
+          "value": 23.0
+        },
+        "discount": 10.0,
+        "subtotal": 218.7805,
+        "tax_amount": 50.3195,
+        "discount_amount": 24.3089,
+        "total": 269.1,
+        "retention": 0.0
+      }
+    ],
+    "summary": {
+      "sum": 243.09,
+      "discount": 24.31,
+      "before_taxes": 218.78,
+      "taxes": 50.32,
+      "total": 269.1,
+      "currency": {
+        "name": "Euro",
+        "code": "EUR",
+        "symbol": "€"
+      },
+      "retention": 0.0,
+      "pay_progress": "100.0",
+      "to_pay": 0.0,
+      "total_paid": 269.1,
+      "taxes_breakdown": [
+        {
+          "category": "IVA23",
+          "items_value": 218.78,
+          "tax_value": 50.32
+        }
+      ],
+      "total_currency_rate": 0.0,
+      "rate": 1.0
+    },
+    "owner_invoice_id": null,
+    "currency": {
+      "name": "Euro",
+      "code": "EUR",
+      "symbol": "€"
+    },
+    "auto_add_related_document": false
+  }
+}

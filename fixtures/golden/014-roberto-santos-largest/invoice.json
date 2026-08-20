@@ -1,0 +1,66 @@
+{
+  "invoice": {
+    "id": 250188950,
+    "status": "settled",
+    "archived": false,
+    "type": "Invoice",
+    "sequence_number": "23/OXD2026",
+    "inverted_sequence_number": "OXD2026/23",
+    "sequence_id": 5998917,
+    "atcud": "J62NTBW9-23",
+    "saft_hash": "AHp1",
+    "date": "2026-02-01",
+    "due_date": "2026-02-01",
+    "reference": "1195",
+    "observations": "",
+    "token": "250188950f6d68837436ff33ec539533b37b202d7bde331f5",
+    "permalink": "https://web.invoicexpress.com/documents/250188950f6d68837436ff33ec539533b37b202d7bde331f5?language=pt",
+    "retention": 0.0,
+    "global_discount": null,
+    "account": {
+      "organization_name": "YLY - UNIPESSOAL, LDA",
+      "address": {"detail": "Apartado 000032\r\nEC Valadares", "postal_code": "4405-589", "city": "Vila Nova de Gaia", "country": "Portugal"},
+      "email": "info@youlovepadel.pt",
+      "phone": "968063931",
+      "website": "http://www.oxdogpadel.pt",
+      "fiscal_id": "513171630",
+      "bank_data": [{"name": "NIB", "value": "0033 0000 4545 3036 8740 5"}, {"name": "IBAN", "value": "PT50 0033 0000 4545 3036 87405"}, {"name": "Swift/BIC", "value": "BCOMPTPL"}]
+    },
+    "client": {
+      "id": 191109640,
+      "name": "Roberto Santos",
+      "email": "rpasantos@mac.com",
+      "fiscal_id": "",
+      "country": "Portugal",
+      "address": {"detail": "SOMEQ - Pq Emp Cancela, Pl 1.2 Inferior", "postal_code": "9125-042", "city": "Santa Cruz", "address_country": "PT"}
+    },
+    "items": [
+      {"id": 460988457, "name": "OXD-TSHIRT-DELTA-WOMEN-PRETO-L", "description": "Delta Shirt Mulher Preta - L", "unit_price": 32.4797, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 32.4797, "tax_amount": 7.4703, "discount_amount": 0.0, "total": 39.95, "retention": 0.0},
+      {"id": 460988458, "name": "OXD-TSHIRT-DELTA-WOMEN-BRANCO-L", "description": "Delta Shirt Mulher Branca - L", "unit_price": 32.4797, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 32.4797, "tax_amount": 7.4703, "discount_amount": 0.0, "total": 39.95, "retention": 0.0},
+      {"id": 460988459, "name": "32822332948804", "description": "Saia TieBreak Preta - L", "unit_price": 32.439, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 32.439, "tax_amount": 7.461, "discount_amount": 0.0, "total": 39.9, "retention": 0.0},
+      {"id": 460988460, "name": "32822332981572", "description": "Saia TieBreak Branca - L", "unit_price": 32.439, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 32.439, "tax_amount": 7.461, "discount_amount": 0.0, "total": 39.9, "retention": 0.0},
+      {"id": 460988461, "name": "32822333014340", "description": "Chapéu OXDOG Preto", "unit_price": 24.3089, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 24.3089, "tax_amount": 5.591, "discount_amount": 0.0, "total": 29.8999, "retention": 0.0},
+      {"id": 460988462, "name": "32822333047108", "description": "PUNHO LONGO PRETO", "unit_price": 6.5041, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 6.5041, "tax_amount": 1.4959, "discount_amount": 0.0, "total": 8.0, "retention": 0.0},
+      {"id": 460988463, "name": "OXD-MOCHILA-HYPER-TOUR-THERMO", "description": "Mochila Hyper Tour Thermo 34L (Preto e Dourado)", "unit_price": 56.8293, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 56.8293, "tax_amount": 13.0707, "discount_amount": 0.0, "total": 69.9, "retention": 0.0},
+      {"id": 460988464, "name": "OXD-SACO-HYPER-PRO-THERMO", "description": "Saco Hyper Pro Thermo 48L (Preto e Dourado)", "unit_price": 72.3577, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 72.3577, "tax_amount": 16.6423, "discount_amount": 0.0, "total": 89.0, "retention": 0.0},
+      {"id": 460988465, "name": "OXD-ULTIMATE-PRO-SMASH-26", "description": "Ultimate Pro Smash 2026 - 30mm", "unit_price": 267.4797, "unit": "", "quantity": 1.0, "tax": {"id": 86129, "name": "IVA23", "value": 23.0}, "discount": 0.0, "subtotal": 267.4797, "tax_amount": 61.5203, "discount_amount": 0.0, "total": 329.0, "retention": 0.0}
+    ],
+    "summary": {
+      "sum": 557.32,
+      "discount": 0.0,
+      "before_taxes": 557.32,
+      "taxes": 128.18,
+      "total": 685.5,
+      "currency": {"name": "Euro", "code": "EUR", "symbol": "€"},
+      "retention": 0.0,
+      "pay_progress": "100.0",
+      "to_pay": 0.0,
+      "total_paid": 685.5,
+      "taxes_breakdown": [{"category": "IVA23", "items_value": 557.32, "tax_value": 128.18}],
+      "total_currency_rate": 0.0,
+      "rate": 1.0
+    },
+    "owner_invoice_id": null,
+    "currency": {"name": "Euro", "code": "EUR", "symbol": "€"}
+  }
+}
