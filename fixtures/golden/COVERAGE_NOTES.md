@@ -52,6 +52,26 @@ material and worth exercising in Bar B / Bar D:
 
 - `011-helio-rodrigues`: rounding drift between per-line-rounded total (267.90)
   and the invoice's actual total (267.89).
+- **`016-leticia-azevedo`: a genuine human data-entry error, not a discount
+  pattern to replicate.** Zoho records a real 10% discount on this line
+  (`discount_amount: 23.9` on `rate: 239`, giving a discounted net of 174.88).
+  The human invoice used that already-discounted 174.88 as InvoiceXpress's
+  `unit_price` and *also* applied InvoiceXpress's own 10% line discount on top
+  — a double discount. Its invoice total (193.59) does not reconcile to its
+  sales order total (215.10). See `CONTRACT.md` for the correct, non-buggy
+  formula (unit price = `rate / (1 + tax_rate)`, discount applied once). Do
+  not treat fixture 016's total as ground truth; the mathematically correct
+  output (matching the sales order total) should be judged as at least as
+  acceptable as this fixture's flawed human total in Bar A.
+- Round-1 finding, confirmed with the user (2026-08-20): the 10% discount on
+  every `sales_channel: "direct_sales"` fixture (003–010, 017, 019–021,
+  023, 025, 026, 028, 029, 034, 036–040 — 22 of 42) is **not present anywhere
+  in the corresponding Zoho sales order** (`has_discount: false`,
+  `discount: 0`, no custom fields/notes/tags carry it either; Zoho contact-level
+  price-list data could not be checked — this session's credentials don't have
+  contact-read access). By user decision, the middleware parks these orders
+  for human review rather than guessing the discount. See `CONTRACT.md` for
+  the resulting business rule.
 - `034`, `036`–`040`: the Zoho sales order shows no discount but the hand-made
   invoice applies the 10% promo anyway (tagged `so_invoice_discount_divergence`
   in `manifest.json`).
