@@ -33,17 +33,17 @@
 </head>
 <body>
   <h1>Gauntlet workbench</h1>
-  <div class="subtitle">Zoho Inventory → InvoiceXpress draft-invoice middleware. Judged against SPEC.md. Last updated: round 0.</div>
-  <div class="round-badge">ROUND 0 — scaffolding + fixture acquisition</div>
+  <div class="subtitle">Zoho Inventory → InvoiceXpress draft-invoice middleware. Judged against SPEC.md. Last updated: round 1 (fixture corpus landed).</div>
+  <div class="round-badge">ROUND 1 — fixture corpus complete, mapping/resolution pieces not yet built</div>
 
   <section>
     <h2>Definition of done (SPEC.md §7)</h2>
     <table>
       <thead><tr><th>Gate</th><th>Status</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>Every golden fixture wins/ties its blind A/B</td><td class="status-pending">not started</td><td>fixtures/golden/ corpus being built from live Zoho + InvoiceXpress data</td></tr>
-        <tr><td>Bar B reconciliation exact across corpus</td><td class="status-pending">not started</td><td>waiting on fixtures + mapping code</td></tr>
-        <tr><td>Customer resolution ordering: zero false-positive rate</td><td class="status-pending">not started</td><td>waiting on fixtures</td></tr>
+        <tr><td>Every golden fixture wins/ties its blind A/B</td><td class="status-pending">not started</td><td>42 fixtures ready; no mapping code exists yet to generate a payload to judge</td></tr>
+        <tr><td>Bar B reconciliation exact across corpus</td><td class="status-pending">not started</td><td>fixtures ready; waiting on mapping code</td></tr>
+        <tr><td>Customer resolution ordering: zero false-positive rate</td><td class="status-pending">not started</td><td>fixtures ready; experiment not yet run</td></tr>
         <tr><td>Adversarial suite green</td><td class="status-pending">not started</td><td>critic-authored suite not yet written</td></tr>
         <tr><td>Fresh critic passes Bar E test</td><td class="status-progress">scaffold exists</td><td>dashboard built (order list, per-order detail, request/response log, replay stub); not yet critic-tested end to end</td></tr>
         <tr><td>Every hard gate (§2) has a red-when-removed test</td><td class="status-pending">not started</td><td>no mapping/invoice-creation code exists yet to gate</td></tr>
@@ -64,10 +64,29 @@
   <section>
     <h2>Fixture corpus (fixtures/golden/)</h2>
     <div class="grid">
-      <div class="tile"><div class="n">—</div><div class="label">Pairs built</div></div>
-      <div class="tile"><div class="n">—</div><div class="label">Required categories covered</div></div>
+      <div class="tile"><div class="n">42</div><div class="label">Pairs built (min. 40)</div></div>
+      <div class="tile"><div class="n">7 / 11</div><div class="label">Required categories fully covered</div></div>
+      <div class="tile"><div class="n">OXD2026</div><div class="label">Series scope (mandatory, user-set)</div></div>
     </div>
-    <p style="color: var(--muted); font-size: 13px; margin-top: 12px;">Building now: pulling real historical Zoho sales orders and their hand-made InvoiceXpress invoices, correlating by reference number, tagging each fixture against SPEC.md §3's 11 required categories. Updates when the fetch completes.</p>
+    <p style="font-size: 13px; margin-top: 12px;">Source: real historical Zoho Inventory sales orders correlated with their hand-made InvoiceXpress invoices (name + date-proximity + total, since IX's <code>reference</code> field does not match Zoho's). Restricted, by explicit instruction, to invoices in series <strong>OXD2026 onwards</strong> — confirmed no later OXD-family series exists yet in this account, so this is currently exactly OXD2026.</p>
+    <table>
+      <thead><tr><th>Category</th><th>Status</th><th>Example fixture(s)</th></tr></thead>
+      <tbody>
+        <tr><td>B2B with NIF</td><td class="status-pass">covered</td><td>003, 004, 007, 028, 029</td></tr>
+        <tr><td>B2C, no NIF (consumidor final)</td><td class="status-pass">covered</td><td>001, 002, 033, 041</td></tr>
+        <tr><td>Line-level % discount</td><td class="status-pass">covered</td><td>~27 fixtures (recurring 10% promo)</td></tr>
+        <tr><td>Line-level absolute discount</td><td class="status-fail">absent from OXD2026 data</td><td>none — every discount observed is %-based</td></tr>
+        <tr><td>Header/entity-level discount</td><td class="status-fail">absent from OXD2026 data</td><td>none — global_discount always null</td></tr>
+        <tr><td>Header + line discount combined</td><td class="status-fail">absent (depends on header discount)</td><td>none</td></tr>
+        <tr><td>Zero-price / free line</td><td class="status-pass">covered</td><td>001 (sock line, "Oferta")</td></tr>
+        <tr><td>Mixed VAT rates</td><td class="status-fail">thin/absent</td><td>001 is close but invoice normalizes to one rate</td></tr>
+        <tr><td>Non-PT customer</td><td class="status-pass">covered (with a landmine)</td><td>002 — Zoho says GB, IX client record says Portugal</td></tr>
+        <tr><td>Largest order</td><td class="status-progress">covered within scope only</td><td>014 (€685.50) — true account-wide largest is non-OXD2026, excluded</td></tr>
+        <tr><td>Smallest order</td><td class="status-pass">covered</td><td>001 (€15.99)</td></tr>
+      </tbody>
+    </table>
+    <p style="color: var(--muted); font-size: 13px; margin-top: 8px;">Full rationale for the 4 unmet/thin categories and 2 scope caveats: <code>fixtures/golden/COVERAGE_NOTES.md</code>. Decision (confirmed with user): accept as documented, do not synthesize or relax series scope to backfill.</p>
+    <p style="font-size: 13px; margin-top: 8px;"><strong>Bonus adversarial material found:</strong> rounding drift (011: SO total 267.90 vs invoice 267.89), SO/invoice discount divergence (034, 036–040), and standalone evidence of the SPEC §3 Bar C "Luis Castro" duplicate-client case (3+ InvoiceXpress client records sharing NIF 205694934) — not backed by a golden fixture, but usable directly in Bar C/D testing.</p>
   </section>
 
   <section>
@@ -101,11 +120,12 @@
   <section>
     <h2>Currently open gaps</h2>
     <ul>
-      <li>fixtures/golden/ corpus does not exist yet — blocking Bar A, Bar B, Bar C measurement.</li>
-      <li>No customer resolution, item resolution, discount/tax mapping, or invoice-assembly code written yet.</li>
+      <li>No customer resolution, item resolution, discount/tax mapping, or invoice-assembly code written yet — this is the next wave.</li>
       <li>No webhook ingestion endpoint yet (idempotent order store exists, nothing calls it yet).</li>
       <li>No InvoiceXpress or Zoho API client wrappers yet (needed to exercise the known landmines in SPEC.md §4).</li>
       <li>Adversarial suite and Bar E blind test not yet run.</li>
+      <li>Golden corpus has no real example of absolute discount, header-level discount, or mixed VAT — that logic must be built and unit-tested directly since Bar A can't exercise it here (see fixtures/golden/COVERAGE_NOTES.md).</li>
+      <li>"Largest order" fixture (014) is largest within OXD2026 scope only, not account-wide.</li>
     </ul>
   </section>
 </body>
