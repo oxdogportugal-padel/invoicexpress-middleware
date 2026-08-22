@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  // Normalized digits only, e.g. "912345678" (no spaces, no country code).
+  phone     String   @unique
+  pinHash   String
+  name      String?
+  createdAt DateTime @default(now())
+  orders    Order[]
+}
+
+model Order {
+  id     String @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  // Serialized cart line items: [{ variantId, productId, title, image, qty, price }]
+  itemsJson       String
+  subtotal        Float
+  discountPercent Int    @default(0)
+  total           Float
+
+  // pending | paid | failed | expired
+  status String @default("pending")
+
+  mbwayRequestId String?
+  mbwayPhone     String?
+
+  shopifyOrderId   String?
+  shopifyOrderName String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
